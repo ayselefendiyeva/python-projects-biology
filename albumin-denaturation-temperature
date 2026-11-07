@@ -1,0 +1,41 @@
+#This program on Python calculates the albumin denaturation temperature via binary search.
+
+#The albumin denaturation temperature is between 60 and 70 °C. To simplify, we take it as 65 °C.
+
+#The user enters the boundary temperature. The program checks if values are entered correctly.
+
+while True:
+	try:
+		low = int(input("Enter the lower temperature boundary: "))
+		high = int(input("Enter the higher temperature boundary: "))
+		if low <= high:
+			break
+		else:
+			print("Error: Lower boundary cannot be greater than higher boundary. Please, try again.")
+	except ValueError:
+				print("Error: Invalid input. Temperature boundaries must be integers.")
+
+medium = None
+
+while low <= high:
+	medium = (high + low) // 2
+	if medium == 65:
+		#Target temperature found.
+		print("The albumin denaturation temperature is found.")
+		break
+	elif medium > 65:
+		#The temperature is too high. Albumin is denaturated.
+		high = medium - 1
+	else:
+		#The temperature is too low. Albumin is native.
+		low = medium + 1
+		
+
+#Final output.
+
+if medium == 65:
+	print("Congratulations! You've found the albumin denaturation temperature!")
+	print(f"The albumin denaturation temperature is {medium} °C.")
+	print("Binary search is completed successfully.")
+else:
+	print("Program finished without finding the temperature due to incorrect range or input error.")
